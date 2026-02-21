@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}Lista de Perfumes{% endblock %}
+{% block content %}
+
+<div class="mb-4">
+    <a href="{{ url_for('create_perfume') }}" class="button is-success">
+        Agregar Perfume
+    </a>
+</div>
+
+<div class="table-container">
+    <table class="table is-bordered is-fullwidth is-hoverable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Marca</th>
+                <th>Tipo</th>
+                <th>Género</th>
+                <th>Volumen (ml)</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for perfume in perfumes %}
+            <tr>
+                <td>{{ perfume.id_perfume }}</td>
+                <td>{{ perfume.nombre }}</td>
+                <td>{{ perfume.marca }}</td>
+                <td>{{ perfume.tipo }}</td>
+                <td>{{ perfume.genero }}</td>
+                <td>{{ perfume.volumen_ml }}</td>
+                <td>${{ perfume.precio }}</td>
+                <td>
+                    <div class="buttons">
+                        <a href="{{ url_for('delete_perfume', id_perfume= perfume.id_perfume )}}" 
+                           class="button is-danger is-small">
+                            Eliminar
+                        </a>
+                        <a href="{{ url_for('update_perfume', id_perfume= perfume.id_perfume )}}" 
+                           class="button is-warning is-small">
+                            Actualizar
+                        </a>
+                    </div>
+                </td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
